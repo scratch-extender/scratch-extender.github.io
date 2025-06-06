@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>PersonFinder
+     </title>
+    </head>
+    <Body>
+            <label for="personIdInput">Enter the name below the QR code:</label><br>
+    <input type="text" id="personIdInput" name="personIdInput" >
+
+<br>
+    <button onclick="searchPerson()">Search</button>
+<p id = details></p>
+<script>
+  const People_Database = {
+  "Pooja_Rohan_Chhajed_1": ["Pooja Rohan Chhajed", "9850885213", "poojarchhajed@gmail.com"],
+  "Rishaan_Rohan_Chhajed_1": ["Rishaan Rohan Chhajed", "9850885213", "9850508182", "rishaan.chhajed@gmail.com", "poojarchhajed@gmail.com", "rohan.chhajed@gmail.com"],
+  "Rohan_Rajendra_Chhajed_1": ["Rohan Rajendra Chhajed", "9850508182", "rohan.chhajed@gmail.com"]
+};
+
+function arrange(detailsArray) {
+  let resultString = "";
+  for (let i = 0; i < detailsArray.length; i++) {
+    resultString += detailsArray[i] + "<br>";
+  }
+  return resultString;
+}
+        function searchPerson() {
+let personKey = document.getElementById("personIdInput").value;
+const found_person_details = People_Database[personKey];
+let details2 = document.getElementById("details")
+
+if (found_person_details) {
+
+  const arrangedOutput = arrange(found_person_details);
+     details2.innerHTML = arrangedOutput;
+} else {
+  details2.textContent = `Person not found.`
+}
+        }
+</script>
+    </Body></html>
