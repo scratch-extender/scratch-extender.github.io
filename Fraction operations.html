@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Fraction Operations</title>
+</head>
+<body>
+<header>
+<h1 style="background-color:#000000; color:#ffffff; font-size:40;"><b>Fraction operations</b></h1>
+</header>
+<article>
+<section>
+<h2 style="background-color:#00ffff; color:#e89f31;"><b>Fraction addition</b></h2>
+<p style="background-color:#d000ff; color:#f4fc03;">To add 2 fractions, their denominators need to be the same. You can do this by finding an equivalent fraction with the same denominator to both the fractions. After finding that denominator. To add those like fractions, you keep the denominator the same. This is the denominator of our sum. Then add the numerators. This is the numerator of our sum. For example:-
+<br> 1/2 + 1/3 = 3/6 + 2/6 = 5/6
+<br>Hence, 1/2 + 1/3 = 5/6.
+<br> Or 4/5 + 3/7
+<br>4/5 + 3/7 = 28/35 + 15/35 = 43/35
+</section>
+<section>
+<h2 style="background-color:#00ffff; color:#e89f31;"><b>Fraction Subtraction</b></h2>
+<p style="background-color:#d000ff; color:#f4fc03;">Fraction subtraction is like addition, however instead of adding the numerator you subtract. For example :-
+<br> 1/2 - 1/3 = 3/6 - 2/6 = 1/6
+<br>Hence, 1/2 - 1/3 = 1/6.
+<br> Or 4/5 - 3/7
+<br>4/5 - 3/7 = 28/35 - 15/35 = 13/35
+<br>The fractions can also have a negative numerator. Like 5/7 - 6/7 = 5-6 / 7 = -1/7
+</section>
+<section>
+<h2 style="background-color:#00ffff; color:#e89f31;"><b>Fraction Multiplication</b></h2>
+<p style="background-color:#d000ff; color:#f4fc03;">Fraction multiplication is comparatively simpler. You multiply the numerators for the numerator of the answer. And multiply the denominators for the denominator of the answer. For example :-
+<br> 1/2 x 1/3 = 1 * 1 / 2 * 3 = 1/6
+<br>Hence, 1/2 x 1/3 = 1/6.
+<br> Or 4/5 x 3/7
+<br>4/5 x 3/7 = 4 x 3 / 5 x 7 = 12/35
+</section>
+<section>
+<h2 style="background-color:#00ffff; color:#e89f31;"><b>Fraction Division</b></h2>
+<p style="background-color:#d000ff; color:#f4fc03;">In fraction division, you take the reciprocal or multiplicative inverse of the fraction that is the divisor(if it is a whole number "a", write it as 1/a), and multiply with the dividend. For example :-
+<br> (1/2) / (1/3) = 1/2 x 3/1 = 3/2
+<br>Hence, (1/2) / (1/3) = 3/2
+<br> Or (4/5) / (3/7)
+<br>(4/5) / (3/7) = 4/5 * 7/3 = 28/15
+</section>
+</article>
+<br>
+<br>
+<article>
+
+<p>Select your level:</p>
+<input type="radio" id="option0" name="myRadioGroup" value="0">
+<label for="option0">First timer</label>&nbsp;
+<input type="radio" id="option1" name="myRadioGroup" value="1">
+<label for="option1">Beginner with little experience</label>&nbsp;
+<input type="radio" id="option2" name="myRadioGroup" value="2">
+<label for="option2">Intermediate</label>&nbsp;
+<input type="radio" id="option3" name="myRadioGroup" value="3">
+<label for="option3">Pro</label>&nbsp;
+<input type="radio" id="option4" name="myRadioGroup" value="4">
+<label for="option4">Master</label>&nbsp;
+<button onclick="getRadioValue()">Set Level</button>
+<p>Simplification is compulsory.</p>
+<div id="calculation"></div>
+<label for="num1">What is the numerator:</label>
+<input type="number" id="num1" name="num1">
+<br>
+<label for="num2">What is the denominator:</label>
+<input type="number" id="num2" name="num2">
+<br>
+<button onclick="checkAnswer()">Check Answer</button>
+<div id="result"></div>
+<script>
+    let s = 5; // Default value for 's' (First timer)
+    let correctAnswer; // Declare correctAnswer globally
+
+    function getRadioValue() {
+        const radios = document.getElementsByName('myRadioGroup');
+        let selectedValue;
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                selectedValue = radios[i].value;
+                break;
+            }
+        }
+
+        // Assign 's' based on the selected radio button
+        if (selectedValue === "0") { // Use string comparison for value from input
+            s = 5;
+        } else if (selectedValue === "1") {
+            s = 10;
+        } else if (selectedValue === "2") { // Assuming 'Intermediate' is 2, adjusted from original
+            s = 25;
+        } else if (selectedValue === "3") { // Pro
+            s = 100;
+        } else if (selectedValue === "4") { // Master
+            s = 250;
+        }
+        // Call generateAndDisplayQuestion after 's' is updated
+        correctAnswer = generateAndDisplayQuestion();
+    }
+
+    function gcd(a, b) {
+        while (b) {
+            let temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+    function simplifyFraction(numerator, denominator) {
+        if (denominator === 0) {
+            return { numerator: 0, denominator: 0 }; // Indicate error, or handle as desired
+        }
+
+        const commonDivisor = gcd(Math.abs(numerator), Math.abs(denominator));
+        const simplifiedNumerator = numerator / commonDivisor;
+        const simplifiedDenominator = denominator / commonDivisor;
+        return { numerator: simplifiedNumerator, denominator: simplifiedDenominator };
+    }
+
+    const calculationDiv = document.getElementById("calculation");
+    const resultDiv = document.getElementById("result");
+    const num1Input = document.getElementById("num1");
+    const num2Input = document.getElementById("num2");
+
+    function generateAndDisplayQuestion() {
+        const min = 1;
+        const max = s; // Use the global 's' value
+
+        let a = Math.floor(Math.random() * (max - min + 1)) + min;
+        let b = Math.floor(Math.random() * (max - min + 1)) + min;
+        let c = Math.floor(Math.random() * (max - min + 1)) + min;
+        let d = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        let e = Math.floor(Math.random() * 4); // 0: +, 1: -, 2: *, 3: /
+
+        let resultNumerator = 0;
+        let resultDenominator = 1;
+        let operationSymbol = "";
+
+        if (e === 0) { // Addition
+            resultNumerator = a * d + c * b;
+            resultDenominator = b * d;
+            operationSymbol = "+";
+        } else if (e === 1) { // Subtraction
+            resultNumerator = a * d - c * b;
+            resultDenominator = b * d;
+            operationSymbol = "-";
+        } else if (e === 2) { // Multiplication
+            resultNumerator = a * c;
+            resultDenominator = b * d;
+            operationSymbol = "*";
+        } else { // Division
+            resultNumerator = a * d;
+            resultDenominator = b * c;
+            operationSymbol = "/";
+        }
+
+        const simplifiedResult = simplifyFraction(resultNumerator, resultDenominator);
+
+        const displayText = `${a}/${b} ${operationSymbol} ${c}/${d} = ?`;
+        calculationDiv.textContent = displayText;
+
+        return {
+            numerator: simplifiedResult.numerator,
+            denominator: simplifiedResult.denominator
+        };
+    }
+
+    function checkAnswer() {
+        const userNum1 = parseInt(num1Input.value);
+        const userNum2 = parseInt(num2Input.value);
+
+        if (isNaN(userNum1) || isNaN(userNum2) || userNum2 === 0) {
+            resultDiv.textContent = "Please enter valid numbers for the numerator and a non-zero denominator.";
+            return;
+        }
+
+        // Simplify user's answer before comparing
+        const simplifiedUserAnswer = simplifyFraction(userNum1, userNum2);
+
+        if (simplifiedUserAnswer.numerator === correctAnswer.numerator && simplifiedUserAnswer.denominator === correctAnswer.denominator) {
+            resultDiv.textContent = "Right!";
+        } else {
+            resultDiv.textContent = `Wrong! The answer is ${correctAnswer.numerator}/${correctAnswer.denominator}`;
+        }
+
+        correctAnswer = generateAndDisplayQuestion(); // Generate next question
+        num1Input.value = ""; // Clear input fields
+        num2Input.value = "";
+    }
+
+    // Initialize the first question when the page loads
+    correctAnswer = generateAndDisplayQuestion();
+</script>
+</article>
+<footer>
+
+</footer>
+</body>
+</html>

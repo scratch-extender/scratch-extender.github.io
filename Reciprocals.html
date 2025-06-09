@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Reciprocals</title>
+</head>
+<body>
+  <header>
+    <h1 style="background-color:#000000; color:#ffffff; font-size:40;"><b>Reciprocals</b></h1>
+  </header>
+  <article>
+    <p style="background-color:#d000ff; color:#f4fc03;"><b>The reciprocal of a fraction is also known as the multiplicative inverse of a fraction. It is basically the numerator and denominator exchanged. For example:-
+      <br> Reciprocal of 3/5 is 5/3.
+      <br>Reciprocal of 6/1 is 1/6.
+      <br>Reciprocal of 35/10 is 10/35.
+      <br>0 does not have a reciprocal.
+    </p>
+  </article>
+  <article>
+    <p id="questionText">What is the reciprocal of <span id="fraction"></span>?</p>
+    <form>
+      <label for="num1">Numerator:</label>
+      <input type="number" id="num1" name="num1" min="1">
+      <br>
+      <label for="num2">Denominator:</label>
+      <input type="number" id="num2" name="num2" min="1">
+      <button type="button" onclick="checkReciprocal()">Check Answer</button>
+      <div id="result"></div>
+    </form>
+    <script>
+    const DELAY_MS = 3000;
+    let numerator;
+    let denominator;
+    let reciprocalNumerator;
+    let reciprocalDenominator;
+    let timeoutId;
+    const fractionDisplay = document.getElementById("fraction");
+    const resultTextElement = document.getElementById("result");
+
+    function generateFraction() {
+        numerator = Math.floor(Math.random() * 9) + 2;
+        denominator = Math.floor(Math.random() * 9) + 2;
+        fractionDisplay.textContent = `${numerator}/${denominator}`;
+        reciprocalNumerator = denominator;
+        reciprocalDenominator = numerator;
+    }
+
+    function checkReciprocal() {
+        let userAnswerNumerator = parseInt(document.getElementById("num1").value);
+        let userAnswerDenominator = parseInt(document.getElementById("num2").value);
+
+        if (userAnswerNumerator === reciprocalNumerator && userAnswerDenominator === reciprocalDenominator) {
+            resultTextElement.textContent = "Right!";
+        } else {
+            resultTextElement.textContent = `Wrong! The reciprocal is ${reciprocalNumerator}/${reciprocalDenominator}.`;
+        }
+
+        // Clear any existing timeout
+        clearTimeout(timeoutId);
+
+        // Set a new timeout to generate a new fraction after the delay
+        timeoutId = setTimeout(() => {
+            generateFraction();
+            resultTextElement.textContent = ""; // Clear the result message
+        }, DELAY_MS);
+    }
+
+    // Generate the initial fraction
+    generateFraction();
+</script>
+  </article>
+</body>
+</html>

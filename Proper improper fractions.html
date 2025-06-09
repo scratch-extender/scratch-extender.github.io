@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Proper and improper fractions</title>
+</head>
+<body>
+<header>
+    <h1 style="background-color:#000000; color:#ffffff; font-size:40;"><b>Fraction operations</b></h1>
+</header>
+<article>
+<section>
+    <h2 style="background-color:#00ffff; color:#e89f31;"><b>Proper fractions</b></h2>
+    <p style="background-color:#d000ff; color:#f4fc03;">When the numerator(top part) of a fraction is lesser than the denominator(lower part), then the fraction is proper. For example, 5/6, 7/8, 3/6, etc.</p>
+</section>
+
+<section>
+    <h2 style="background-color:#00ffff; color:#e89f31;"><b>Improper fractions</b></h2>
+    <p style="background-color:#d000ff; color:#f4fc03;">When the numerator(top part) of a fraction is greater than or equal to the denominator(lower part), then the fraction is improper. For example, 6/5, 8/7, 3/3, etc.</p>
+</section>
+</article>
+
+<article>
+<form>
+        <input type="radio" id="improper" name="type" value="improper">
+        <label for="improper">Improper</label><br>
+
+        <input type="radio" id="proper" name="type" value="proper">
+        <label for="proper">Proper</label><br><br>
+        <button type="button" onclick="check()">Check</button>
+        <p id="result"></p><br><br>
+        <p id="displayText"></p>
+    </form>
+
+    <script>
+const DELAY_MS = 3000;
+let a;
+let b;
+let k;
+const resultParagraph = document.getElementById("result");
+let g = resultParagraph;
+const displayText = document.getElementById("displayText");
+let timeoutId;
+
+function generateFraction() {
+    a = (Math.floor(Math.random() * 9 )+ 1);
+    b = (Math.floor(Math.random() * 9) + 1);
+    k = `${a} / ${b}`;
+    displayText.textContent = k;
+}
+
+function check(){
+    const typeRadios = document.querySelectorAll('input[name="type"]');
+    let selectedValue;
+
+    for (const radio of typeRadios) {
+        if (radio.checked) {
+            selectedValue = radio.value;
+            break;
+        }
+    }
+
+    if (a >= b) {
+        if (selectedValue === "improper") {
+            g.textContent = "Righto";
+        } else {
+            g.textContent = "Wrong, it is improper";
+        }
+    } else {
+        if (selectedValue === "proper") {
+            g.textContent = "Righto";
+        } else {
+            g.textContent = "Wrong, it is proper";
+        }
+    }
+
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+        generateFraction();
+        typeRadios.forEach(radio => radio.checked = false);
+    }, DELAY_MS);
+}
+
+generateFraction();
+</script>
+</article>
+</body>
+</html>

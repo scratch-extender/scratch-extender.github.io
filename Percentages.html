@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Percentages</title>
+</head>
+<body>
+<header>
+<h1 style="background-color:#000000; color:#ffffff; font-size:40;">Percentages</h1>
+</header>
+<article>
+<p style="background-color:#d000ff; color:#f4fc03;"> Percent is made of 2 words, per and cent. Per means per or every, cent is the Latin word for hundred. So percent literally means per hundred or every hundred. They are really useful in :- 
+<ul style="background-color:#d000ff; color:#f4fc03;"> 
+<li>Finance</li>
+<ol>
+<li>Loans </li>
+<li>Interest rates </li>
+<li>FDs </li>
+<li>Cost projections </li>
+<li>And much more </li>
+</ol>
+<li>Data collection </li>
+<ol>
+<li>Marks </li>
+<li>Attendance </li>
+<li>Advertisement </li>
+<li>Change in biodiversity </li>
+<li>And much more </li>
+</ol>
+</ul>
+<p style="background-color:#d000ff; color:#f4fc03;">
+Percentages can be used instead of fractions. 4/5 = 80 % (% is the symbol of percentage), so instead of saying four fifths of the muffins are sold, you say 80 % of the muffins are sold. There are many ways to turn fractions into percentages, one of the easiest is multiplying the fraction by 100. For example:-<br>
+(4 / 5) * 100 = 400 / 5 = 80, so 80 %.<br>
+(3 / 20) * 100 = 300 / 20 = 15, so 15 %.<br>
+(7 / 9) * 100 = 700 / 9 = (63 + 7/9), so (63 + 7/9)%<br>
+1 * 100 = 100 % <br>
+1.35 * 100 = 135% <br>
+To turn a percentage into a fraction, you do not need to do much. Simply attach an upon 100 and the simplify. For example:-<br>
+70 % = 70 / 100 = 7 / 10<br>
+63 % = 63 / 100<br>
+And so on.<br>
+You can also find some percent of a number. You do this by first turning the percentage to a fraction, then multiplying the fraction and whole number. For example :-<br>
+50 % of 30 = (1 / 2) * 30 = 15<br>
+37 % of 300 = (37 / 100) * 300 = 111<br>
+</p>
+</article>
+<article>
+<p>Write the percentage as a fraction, then simplify (simplification is compulsory), if it is a whole number, write it as the percentage in the numerator and 1 in the denominator.</p>
+<p>The fraction is <span id = q></span></p>
+<form>
+<label for="num1">What is the numerator:</label>
+<input type="number" id="num1" name="num1"><br>
+<label for="num2">What is the denominator:</label>
+<input type="number" id="num2" name="num2"><br>
+<button type="button" onclick="check()">Check</button>
+</form>
+<p id = r></p>
+<script>
+let a;
+let b;
+let q = document.getElementById("q");
+let r = document.getElementById("r");
+function generatefraction() {
+a = Math.floor(Math.random() * 99) + 1;
+b = Math.floor(Math.random() * 99) + 1;
+q.textContent = `${a} / ${b}`
+
+}
+
+function check() {
+    let num1 = parseInt(document.getElementById("num1").value);
+    let num2 = parseInt(document.getElementById("num2").value);
+
+
+        if ((num1 / num2) / 100 == a / b) {
+            r.textContent = "Right";
+        } else {
+            r.textContent = "Wrong";
+        }
+    
+    document.getElementById("num1").value = "";
+    document.getElementById("num2").value = "";
+    generatefraction();
+    }
+generatefraction()
+</script>
+</article></body></html>

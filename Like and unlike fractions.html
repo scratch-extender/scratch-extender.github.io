@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Like and unlike fractions</title>
+</head>
+<body>
+<header>
+    <h1 style="background-color:#000000; color:#ffffff; font-size:40;"><b>Like and unlike fractions</b></h1>
+</header>
+<article>
+<section>
+    <h2 style="background-color:#00ffff; color:#e89f31;"><b>Like fractions</b></h2>
+    <p style="background-color:#d000ff; color:#f4fc03;">When the denominators (the bottom numbers) of two fractions are the same, they are called like fractions. For example, 5/6 and 3/6, 7/8 and 9/8, 4/9 and 9/9, etc.</p>
+</section>
+
+<section>
+    <h2 style="background-color:#00ffff; color:#e89f31;"><b>Unlike fractions</b></h2>
+    <p style="background-color:#d000ff; color:#f4fc03;">Unlike fractions are fractions where the denominators are <b>not</b> the same. For example, 6/5 and 8/7, 1/2 and 3/4, etc.</p>
+</section>
+</article>
+
+<article>
+<p> Are the following fractions like or unlike: <span id="question"></span></p>
+<form>
+        <input type="radio" id="like" name="type" value="like">
+        <label for="like">Like fractions</label><br>
+
+        <input type="radio" id="unlike" name="type" value="unlike">
+        <label for="unlike">Unlike fractions</label><br>
+
+        <button type="button" onclick="check()">Check</button>
+        <p id="result"></p><br>
+        <p id="displayText"></p>
+    </form>
+
+    <script>
+let a;
+let b;
+let c;
+let d;
+let e;
+let f;
+let h = document.getElementById("question");
+const resultParagraph = document.getElementById("result");
+let g = resultParagraph;
+function generatefractions() {
+a = Math.floor(Math.random() * 9) + 1;
+b = Math.floor(Math.random() * 9) + 1;
+c = Math.floor(Math.random() * 9) + 1;
+d = Math.floor(Math.random() * 9) + 1;
+e = Math.floor(Math.random() * 9) + 1;
+if (a >= 5) {
+f = 1
+h.textContent = `${b} / ${c}, ${d} / ${c}`
+}
+else {
+f = 0
+h.textContent = `${b} / ${c}, ${d} / ${e}`
+}
+}
+function check() {
+    const typeRadios = document.querySelectorAll('input[name="type"]');
+    let selectedValue;
+
+    for (const radio of typeRadios) {
+        if (radio.checked) {
+            selectedValue = radio.value;
+            break;
+        }
+    }
+if (selectedValue == "like") {
+    if (f == 1) {
+        g.textContent = "Right"
+}
+    else {
+        g.textContent = "Wrong"
+}
+}
+
+else {
+    if (f == 0) {
+        g.textContent = "Right"
+}
+    else {
+        g.textContent = "Wrong"
+}
+}
+generatefractions()
+}
+generatefractions()
+</script>
+</article>
+</body>
+</html>

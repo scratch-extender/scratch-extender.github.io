@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Simplification</title>
+</head>
+<body>
+<header>
+<h1 style="background-color:#000000; color:#ffffff; font-size:40;"><b>Simplifying fractions</b></h1>
+</header>
+<article>
+<p style="background-color:#d000ff; color:#f4fc03;">
+Simplification is a very important aspect of fractions. To simplify a fraction means to reduce a fraction to its lowest form. The GCD or Greatest Common Divisor of the numerator and denominator should be 1. You can obtain a simplified fraction by dividing both the numerator and denominator with their current GCD. For example :- <br>
+In 8/4, the greatest number that divides both 8 and 4 leaving a whole number quotient, also known as their GCD is 4. 8 divided by 4 is 2, and 4 divided by 4 is 1. So 8/4 after simplification is 2/1.
+Another case is 35/49. In this case, the greatest number that divides both 35 and 49 leaving a whole number quotient, also known as their GCD is 7. 35 divided by 7 is 5, and 49 divided by 7 is 7. So, the simplified form of 35/49 is 5/7.
+However, say we have 3/7 or 4/5. Ther GCD is already 1. So both of these fractions cannot be simplified further.
+</p>
+</article>
+<article>
+<p id = "question"></p>
+<form>
+<label for="num1">Numerator:</label>
+<input type="number" id="num1" name="num1" min="1">
+<br>
+<label for="num2">Denominator:</label>
+<input type="number" id="num2" name="num2" min="1">
+<button type="button" onclick="check()">Check Answer</button>
+<div id="result"></div>
+</form>
+<p id = "feedback"></p>
+</article>
+<script>
+let originalNumerator; // Declared globally
+let originalDenominator; // Declared globally
+let questionText = document.getElementById("question");
+let feedbackText = document.getElementById("feedback");
+let numInput = document.getElementById("num1"); // Renamed to avoid conflict
+let denInput = document.getElementById("num2"); // Renamed to avoid conflict
+
+ function calculateGCD(a, b) {
+if (b === 0) {
+ return a;
+}
+return calculateGCD(b, a % b);
+}
+function generatefraction() {
+ let commonMultiplier = Math.floor(Math.random() * 5) + 2; // Common multiplier for non-simplified fractions
+let simplifiedNumerator = Math.floor(Math.random() * 9) + 1;
+let simplifiedDenominator = Math.floor(Math.random() * 9) + 1;
+
+while (calculateGCD(simplifiedNumerator, simplifiedDenominator) !== 1) {
+simplifiedNumerator = Math.floor(Math.random() * 9) + 1;
+simplifiedDenominator = Math.floor(Math.random() * 9) + 1;
+}
+
+if (Math.random() < 0.7) { // 70% chance to generate a fraction that needs simplification
+originalNumerator = simplifiedNumerator * commonMultiplier;
+originalDenominator = simplifiedDenominator * commonMultiplier;
+} else { // 30% chance to generate an already simplified fraction
+originalNumerator = simplifiedNumerator;
+originalDenominator = simplifiedDenominator;
+ }
+questionText.textContent = `${originalNumerator} / ${originalDenominator}`;
+feedbackText.textContent = ""; // Clear previous feedback
+        numInput.value = ""; // Clear input fields
+        denInput.value = "";
+    }
+
+    function check() {
+        let userNumerator = parseInt(numInput.value);
+        let userDenominator = parseInt(denInput.value);
+
+        if (isNaN(userNumerator) || isNaN(userDenominator) || userNumerator <= 0 || userDenominator <= 0) {
+            feedbackText.textContent = `Please enter valid positive numbers for both numerator and denominator.`;
+            return;
+        }
+
+        // Calculate the simplified form of the original fraction
+        let gcdOriginal = calculateGCD(originalNumerator, originalDenominator);
+        let correctSimplifiedNumerator = originalNumerator / gcdOriginal;
+        let correctSimplifiedDenominator = originalDenominator / gcdOriginal;
+
+        // Calculate the GCD of the user's answer
+        let gcdUser = calculateGCD(userNumerator, userDenominator);
+
+        // Check if the user's answer is in its lowest form and is equivalent to the correct simplified fraction
+        if (gcdUser === 1 && userNumerator === correctSimplifiedNumerator && userDenominator === correctSimplifiedDenominator) {
+            feedbackText.textContent = `Right! The simplified form of ${originalNumerator}/${originalDenominator} is ${correctSimplifiedNumerator}/${correctSimplifiedDenominator}.`;
+        } else if (userNumerator / userDenominator === originalNumerator / originalDenominator) {
+            feedbackText.textContent = `Your answer ${userNumerator}/${userDenominator} is equivalent to the original fraction, but it is not in its lowest form. The simplified form is ${correctSimplifiedNumerator}/${correctSimplifiedDenominator}.`;
+        }
+        else {
+            feedbackText.textContent = `Wrong. Try again! The simplified form of ${originalNumerator}/${originalDenominator} is ${correctSimplifiedNumerator}/${correctSimplifiedDenominator}.`;
+        }
+        
+        // Generate a new fraction after a short delay
+        setTimeout(generatefraction, 3000); 
+    }
+
+    // Initial call to generate the first fraction when the page loads
+    generatefraction();
+  </script>
+</body>
+</html>

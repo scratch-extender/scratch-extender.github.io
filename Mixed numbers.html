@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mixed numbers</title>
+</head>
+<body onload="generatefraction1(); generatefraction2();">
+<header>
+<h1 style="background-color:#000000; color:#ffffff; font-size:40;"><b>Mixed numbers</b></h1>
+</header>
+<article>
+<section>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5<br>
+7&nbsp;&nbsp; ——— <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6<br>
+<p style="background-color:#d000ff; color:#f4fc03;">Mixed numbers are made of 2 parts, a whole number and a fraction. In standard form, it is shown near the top. However, for now we'll express it as (a + (b/c)). Improper fractions can be converted to mixed numbers. You do this by actually dividing the dividend and divisor, writing the quotient as the integer, then the remainder in the numerator and the divisor in the denominator. For example:-
+5/3 = 1 + 2/3, 19 / 8 = 2 + 3/8.
+You can also turn a mixed number into an improper fraction. Do this by multiplying the integer and divisor, and then add it to the remainder. This number is your numerator. The divisor stays in the denominator. For example:-
+1 + 2/3 = [(1 * 3) + 2] / 3 = 5/3.
+By now, you must already know how to do operations on fractions. You can now apply this knowledge in mixed numbers. One of the simpler ways to do operations on mixed numbers is to first convert to an improper fraction, then do the operations on the fractions and finally, if possible convert back to a mixed fraction. For instance :-<br>
+(1 + 2/3) * (3 + 6/7) = 5/3 * 27/7 = 6 + 9/21 = 6 + 3/7
+</article>
+<section style = "color:#000FFF; background-color:#edbb4f92">
+<p>Convert <span id = q1></span> to an improper fraction </p>
+<form>
+<label for="num1">What is the numerator:</label>
+<input type="number" id="num1" name="num1">
+<br>
+<label for="den1">What is the denominator:</label>
+<input type="number" id="den1" name="den1">
+<br>
+<button type="button" onclick="check1()">Check</button>
+</form>
+<p id="result1"></p><br>
+<p>Convert <span id = q2></span> to a mixed number</p>
+<form>
+<label for="wn">What is the whole number:</label>
+<input type="number" id="wn" name="wn">
+<br>
+<label for="num2">What is the numerator:</label>
+<input type="number" id="num2" name="num2">
+<br>
+<label for="den2">What is the denominator:</label>
+<input type="number" id="den2" name="den2">
+<br>
+<button type="button" onclick="check2()">Check</button>
+</form>
+<p id = result2></p>
+<script>
+let f;
+let h;
+let g;
+let i;
+let j;
+let q1 = document.getElementById("q1");
+let q2 = document.getElementById("q2");
+let r1 = document.getElementById("result1");
+let r2 = document.getElementById("result2");
+function generatefraction2() {
+let a;
+let b;
+a = Math.floor(Math.random() * 9) + 2;
+b = Math.floor(Math.random() * 9) + 2;
+if (a > b) {
+q2.textContent = `${a} / ${b}`
+h = Math.floor(a / b)
+i = a % b
+j = b
+}
+else {
+q2.textContent = `${b} / ${a}`
+h = Math.floor(b / a)
+i = b % a
+j = a
+}
+}
+function generatefraction1() {
+let c;
+let d;
+let e;
+c = Math.floor(Math.random() * 9) + 2;
+d = Math.floor(Math.random() * 9) + 2;
+e = Math.floor(Math.random() * 9) + 2;
+if (d > e) {
+q1.textContent = `${c} + (${e} / ${d})`
+}
+f = (c * d) + e
+g = d
+if (d < e) {
+q1.textContent = `${c} + (${d} / ${e})`
+f = (c * e) + d
+g = e
+}
+if (d == e) {
+d += 1
+ if (d < e) {
+q1.textContent = `${c} + (${d} / ${e})`
+f = (c * e) + d
+g = d
+}
+}
+}
+
+function check1() {
+let num1 = document.getElementById("num1").value;
+let den1 = document.getElementById("den1").value;
+if (num1/den1 == f/g) 
+r1.textContent = "Right"
+
+else {
+r1.textContent = "Wrong"
+}
+generatefraction1()
+ document.getElementById("num1").value = "";
+document.getElementById("den1").value = "";
+}
+
+
+function check2() {
+let num2 = document.getElementById("num2").value;
+let den2 = document.getElementById("den2").value;
+let wn = document.getElementById("wn").value;
+if (num2 == i && den2 == j && wn == h) 
+{
+r2.textContent = "Right"
+}
+else {
+r2.textContent = "Wrong"
+}
+generatefraction2()
+  document.getElementById("wn").value = "";
+  document.getElementById("num2").value = "";
+  document.getElementById("den2").value = "";
+}
+
+
+generatefraction1()
+generatefraction2()
+
+</script>
+</section>
+</body></html>
